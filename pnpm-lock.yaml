@@ -8,10 +8,16 @@ importers:
 
   .:
     dependencies:
+      svg-arc-to-cubic-bezier:
+        specifier: ^3.2.0
+        version: 3.2.0
       svg-path-parser:
         specifier: 1.1.0
         version: 1.1.0
     devDependencies:
+      '@types/svg-arc-to-cubic-bezier':
+        specifier: ^3.2.3
+        version: 3.2.3
       '@types/svg-path-parser':
         specifier: 1.1.6
         version: 1.1.6
@@ -283,6 +289,9 @@ packages:
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+
+  '@types/svg-arc-to-cubic-bezier@3.2.3':
+    resolution: {integrity: sha512-UNOnbTtl0nVTm8hwKaz5R5VZRvSulFMGojO5+Q7yucKxBoCaTtS4ibSQVRHo5VW5AaRo145U8p1Vfg5KrYe9Bg==}
 
   '@types/svg-path-parser@1.1.6':
     resolution: {integrity: sha512-3sw6pk91pEtW6W7hRrJ9ZkAgPiJSaNdh7iY8rVOy7buajpQuy2J9A0ZUaiOVcbFvl0p7J+Ne4012muCE/MB+hQ==}
@@ -601,6 +610,9 @@ packages:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
 
+  svg-arc-to-cubic-bezier@3.2.0:
+    resolution: {integrity: sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g==}
+
   svg-path-parser@1.1.0:
     resolution: {integrity: sha512-jGCUqcQyXpfe38R7RFfhrMyfXcBmpMNJI/B+4CE9/Unkh98UporAc461GTthv+TVDuZXsBx7/WiwJb1Oh4tt4A==}
 
@@ -850,6 +862,8 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.6': {}
+
+  '@types/svg-arc-to-cubic-bezier@3.2.3': {}
 
   '@types/svg-path-parser@1.1.6': {}
 
@@ -1200,6 +1214,8 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  svg-arc-to-cubic-bezier@3.2.0: {}
 
   svg-path-parser@1.1.0: {}
 
