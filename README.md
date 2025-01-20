@@ -36,7 +36,6 @@ The optional `decimals` option controls the precision of values produces for eac
 
 ## TODO (aka Known Limitations)
 
-- Strange issue with smooth + smooth curves
 - Subsample linear sections if they are within the `tolerance`.
 - Support negative values for `decimals`.
 
