@@ -102,6 +102,17 @@ export function svgPathToPolygons(
     x3: number,
     y3: number,
   ): void {
+    // ignore degenerate curves
+    if (
+      x0 === x1 &&
+      x0 === x2 &&
+      x0 === x3 &&
+      y0 === y1 &&
+      y0 === y2 &&
+      y0 === y3
+    ) {
+      return;
+    }
     const x01 = (x0 + x1) / 2,
       y01 = (y0 + y1) / 2,
       x12 = (x1 + x2) / 2,
