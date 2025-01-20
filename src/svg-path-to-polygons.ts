@@ -54,14 +54,18 @@ export function svgPathToPolygons(
         let x1 = 0,
           y1 = 0;
         if (prev) {
-          if (prev.code === "C") {
-            x1 = prev.x! * 2 - prev.x2!;
-            y1 = prev.y! * 2 - prev.y2!;
+          if (prev.code === "C" || prev.code === "S") {
+            x1 = cmd.x0! * 2 - prev.x2!;
+            y1 = cmd.y0! * 2 - prev.y2!;
           } else {
-            x1 = prev.x!;
-            y1 = prev.y!;
+            x1 = cmd.x0!;
+            y1 = cmd.y0!;
           }
+        } else {
+          x1 = cmd.x0!;
+          y1 = cmd.y0!;
         }
+
         sampleCubicBezier(
           cmd.x0!,
           cmd.y0!,
