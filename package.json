@@ -1,13 +1,20 @@
 {
   "name": "svg-path-to-polygons",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Converts path commands for an SVG path to polygonal points.",
-  "main": "svg-path-to-polygons.js",
+  "main": "dist/umd/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/umd/index.js"
+  },
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "build": "tsc && tsc -p tsconfig.umd.json",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -24,9 +31,13 @@
   },
   "homepage": "https://github.com/Phrogz/svg-path-to-polygons#readme",
   "dependencies": {
-    "svg-path-parser": "^1.1.0"
+    "svg-path-parser": "1.1.0"
   },
   "devDependencies": {
-    "chai": "^4.0.2"
-  }
+    "@types/svg-path-parser": "1.1.6",
+    "prettier": "3.4.2",
+    "typescript": "5.7.3",
+    "vitest": "3.0.2"
+  },
+  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
 }
