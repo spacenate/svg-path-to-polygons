@@ -1,6 +1,8 @@
 import { parseSVG, makeAbsolute, CommandMadeAbsolute } from "svg-path-parser";
 import { sampleCubicBezier } from "./cubic";
 import { Polygon, SvgPathToPolygonsOptions } from "./types";
+import { quadraticToCubicBezier } from "./quadratic";
+import { ellipticArcToCubicBezierCurves } from "./arc";
 
 /**
  * Converts an SVG path string to an array of polygons.
@@ -73,6 +75,52 @@ export function svgPathToPolygons(
           addPoint,
         );
         addPoint(cmd.x!, cmd.y!);
+        break;
+      }
+
+      case "Q": {
+        const [cp0, cp1, cp2, cp3] = quadraticToCubicBezier(cmd);
+        sampleCubicBezier(
+          cp0[0],
+          cp0[1],
+          cp1[0],
+          cp1[1],
+          cp2[0],
+          cp2[1],
+          cp3[0],
+          cp3[1],
+          tolerance2,
+          addPoint,
+        );
+        addPoint(cp3[0], cp3[1]);
+        break;
+      }
+
+      case "A": {
+        const curves = ellipticArcToCubicBezierCurves(
+          [cmd.x0!, cmd.y0!],
+          [cmd.x!, cmd.y!],
+          [cmd.rx!, cmd.ry!],
+          cmd.xAxisRotation,
+          cmd.largeArc,
+          cmd.sweep,
+        );
+        curves.forEach(([p0, p1, p2, p3], i) => {
+          if (i === 0) addPoint(p0[0], p0[1]);
+          sampleCubicBezier(
+            p0[0],
+            p0[1],
+            p1[0],
+            p1[1],
+            p2[0],
+            p2[1],
+            p3[0],
+            p3[1],
+            tolerance2,
+            addPoint,
+          );
+          addPoint(p3[0], p3[1]);
+        });
         break;
       }
 
