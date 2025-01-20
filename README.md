@@ -1,23 +1,23 @@
 # svg-path-to-polygons
+
 Node package that converts path commands for an SVG path to polygonal points.
 
 ## Features
 
-* Sparsely represents linear portions of the path by the minimal number of points.
-* Does not skip any imporant features.
-* Uses adaptive subsampling for curves to represent them exactly in the fewest number of points, with an arbitrary tolerance.
-
+- Sparsely represents linear portions of the path by the minimal number of points.
+- Does not skip any imporant features.
+- Uses adaptive subsampling for curves to represent them exactly in the fewest number of points, with an arbitrary tolerance.
 
 ## Installation
 
 `npm install svg-path-to-polygons`
 
-
 ## Usage
+
 ```js
-const { pathDataToPolys } = require('../svg-path-to-polygons.js');
-let pathData = 'M5,15 c5.5,0 10-4.5 10,-10 h10';
-let points = pathDataToPolys(pathData, {tolerance:1, decimals:1});
+const { pathDataToPolys } = require("../svg-path-to-polygons.js");
+let pathData = "M5,15 c5.5,0 10-4.5 10,-10 h10";
+let points = pathDataToPolys(pathData, { tolerance: 1, decimals: 1 });
 console.log(points);
 /*******************************************************************
 [
@@ -34,14 +34,11 @@ The optional `tolerance` option specifies how far (in SVG coordinates) the polyg
 
 The optional `decimals` option controls the precision of values produces for each point. Only non-negative values are currently supported. If unspecified, full precision is used for each number.
 
-
 ## TODO (aka Known Limitations)
 
-* Need to support quadratic Bézier commands.
-* Need to support arc commands.
-* Subsample linear sections if they are within the `tolerance`.
-* Support negative values for `decimals`.
-
+- Strange issue with smooth + smooth curves
+- Subsample linear sections if they are within the `tolerance`.
+- Support negative values for `decimals`.
 
 ## License, Contact, and Support
 
