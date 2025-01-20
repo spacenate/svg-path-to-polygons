@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { svgPathToPolygons } from "../svg-path-to-polygons";
+import { svgPathToPolygons } from "../src";
 
 const expectations = [
 	{
