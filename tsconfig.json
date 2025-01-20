@@ -5,8 +5,8 @@
     "strict": true,
     "declaration": true,
     "outDir": "./dist/esm",
-    "moduleResolution": "Node",
     "lib": ["ES2022", "DOM"],
+    "isolatedModules": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },

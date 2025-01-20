@@ -15,6 +15,9 @@ importers:
       '@types/svg-path-parser':
         specifier: 1.1.6
         version: 1.1.6
+      esbuild:
+        specifier: 0.24.2
+        version: 0.24.2
       prettier:
         specifier: 3.4.2
         version: 3.4.2

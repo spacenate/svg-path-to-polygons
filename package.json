@@ -4,6 +4,8 @@
   "description": "Converts path commands for an SVG path to polygonal points.",
   "main": "dist/umd/index.js",
   "module": "dist/esm/index.js",
+  "browser": "dist/esm-bundled/index.js",
+  "type": "module",
   "types": "dist/esm/index.d.ts",
   "exports": {
     "import": "./dist/esm/index.js",
@@ -13,7 +15,7 @@
     "test": "test"
   },
   "scripts": {
-    "build": "tsc && tsc -p tsconfig.umd.json",
+    "build": "rm -rf dist && tsc && tsc -p tsconfig.umd.json && node build-browser",
     "test": "vitest"
   },
   "repository": {
@@ -35,6 +37,7 @@
   },
   "devDependencies": {
     "@types/svg-path-parser": "1.1.6",
+    "esbuild": "0.24.2",
     "prettier": "3.4.2",
     "typescript": "5.7.3",
     "vitest": "3.0.2"
