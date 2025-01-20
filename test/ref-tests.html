@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG Path to Polygons - Visual Tests</title>
+    <script type="module" src="../dist/esm-bundled/index.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .test-container {
+        margin-bottom: 40px;
+      }
+
+      svg {
+        border: 1px solid #ccc;
+        margin-top: 10px;
+      }
+
+      pre {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 10px;
+        overflow: auto;
+      }
+
+      .original-path {
+        fill: none;
+        stroke: blue;
+      }
+
+      .polygon-path {
+        fill: none;
+        stroke: red;
+        stroke-opacity: var(--polygon-opacity, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SVG Path to Polygons - Visual Tests</h1>
+    <input
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      value="1"
+      id="opacity-slider"
+    />
+    <div id="tests"></div>
+
+    <script type="module">
+      import { compare } from "../dist/esm-bundled/index.js";
+
+      document
+        .querySelector("#opacity-slider")
+        .addEventListener("input", (event) => {
+          document.documentElement.style.setProperty(
+            "--polygon-opacity",
+            event.target.value,
+          );
+        });
+
+      function renderTest({
+        path,
+        title = path.slice(0,16),
+        scale = 4,
+        options = { tolerance: 1, decimals: 2 },
+      }) {
+        const container = document.createElement("div");
+        container.className = "test-container";
+
+        // Title
+        const titleEl = document.createElement("h2");
+        titleEl.textContent = `Path: ${title}`;
+        container.appendChild(titleEl);
+
+        // SVG Visualization
+        const { svg, polygons } = compare(path, options, scale);
+        container.appendChild(svg);
+
+        // Create a details block to hold the polygon data
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = "Polygon Data";
+        details.appendChild(summary);
+
+        const polygonData = document.createElement("pre");
+        polygonData.textContent = JSON.stringify(polygons, null, 2);
+        details.appendChild(polygonData);
+        container.appendChild(details);
+
+        document.getElementById("tests").appendChild(container);
+      }
+
+      const testCases = [
+        {
+          title:"Square",
+          path: "M20,20 h80 v80 h-80",
+        },
+        {
+          title:"Triangle",
+          path: "M50,50 l50,50 l-50,50 Z",
+        },
+        {
+          title:"Zig-Zag",
+          path: "M20,20 L80,20 L20,50 L80,50 L20,80 L80,80",
+        },
+        {
+          title:"Simple Curve",
+          path: "M20,50 C20,80 80,80 80,50",
+        },
+        {
+          title:"Curve + Smooth",
+          path: "M10,80 C40,10 65,10 95,80 S150,150 180,80",
+        },
+        {
+          title: "Smooth + Smooth",
+          path: "M20,50 S20,-20 40,50 S70,80 80,40",
+        },
+        {
+          title:"Heart",
+          path: "M140 20C73 20 20 74 20 140c0 135 136 170 228 303 88-132 229-173 229-303 0-66-54-120-120-120-48 0-90 28-109 69-19-41-60-69-108-69z",
+          scale: 1,
+        },
+        {
+          title: "Banana",
+          path: "M 8,223 c 0,0 143,3 185,-181 c 2,-11 -1,-20 1,-33 h 16 c 0,0 -3,17 1,30 c 21,68 -4,242 -204,196 L 8,223 z M 8,230 c 0,0 188,40 196,-160",
+          scale: 2,
+        },
+      ];
+
+      // Render tests
+      testCases.forEach(renderTest);
+    </script>
+  </body>
+</html>

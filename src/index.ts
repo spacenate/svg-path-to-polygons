@@ -101,14 +101,15 @@ export function svgPathToPolygons(
 
 /**
  * Generates an SVG representation comparing the path and its polygon approximation.
- * Outputs the result directly to the console.
+ * Returns the result as an SVG element that can be added to the DOM.
  * @param pathData The SVG path string to compare.
  * @param opts Optional configuration object for polygon generation.
  */
 export function compare(
   pathData: string,
   opts: SvgPathToPolygonsOptions = {},
-): void {
+  scale = 1,
+) {
   const polys = svgPathToPolygons(pathData, opts);
 
   let minX = Infinity,
@@ -128,25 +129,38 @@ export function compare(
   const dx = maxX - minX;
   const dy = maxY - minY;
 
-  console.log(
-    `
-<svg xmlns="http://www.w3.org/2000/svg" width="${dx}px" height="${dy}px" viewBox="${minX} ${minY} ${dx * 2} ${dy}">
-<style>path,polygon,polyline { fill-opacity:0.2; stroke:black }</style>
-<path d="${pathData}"/>
-<g transform="translate(${dx},0)">
-${polys
-  .map(
-    (poly) =>
-      `  <${
-        poly.closed ? "polygon" : "polyline"
-      } points="${poly.map(([x, y]) => `${x},${y}`).join(" ")}"/>`,
-  )
-  .join("\n")}
-</g>
-</svg>
-  `.trim(),
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  svg.setAttribute("width", `${dx * scale}px`);
+  svg.setAttribute("height", `${dy * scale}px`);
+  const margin = 10;
+  svg.setAttribute(
+    "viewBox",
+    `${minX - margin} ${minY - margin} ${dx + margin * 2} ${dy + margin * 2}`,
   );
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", pathData);
+  path.setAttribute("class", "original-path");
+  svg.appendChild(path);
+
+  const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+  polys.forEach((poly) => {
+    const element = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      poly.closed ? "polygon" : "polyline",
+    );
+    element.setAttribute("points", poly.map(([x, y]) => `${x},${y}`).join(" "));
+    element.setAttribute("class", "polygon-path");
+    group.appendChild(element);
+  });
+
+  svg.appendChild(group);
+
+  return { svg, polygons: polys };
 }
+
 export default {
   pathDataToPolys: svgPathToPolygons,
   compare,

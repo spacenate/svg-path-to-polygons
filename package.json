@@ -16,7 +16,8 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc && tsc -p tsconfig.umd.json && node build-browser",
-    "test": "vitest"
+    "test": "vitest",
+    "ref-test": "http-server . -o test/ref-tests.html"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@types/svg-path-parser": "1.1.6",
     "esbuild": "0.24.2",
+    "http-server": "^14.1.1",
     "prettier": "3.4.2",
     "typescript": "5.7.3",
     "vitest": "3.0.2"
