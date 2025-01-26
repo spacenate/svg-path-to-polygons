@@ -1945,7 +1945,7 @@ var require_svg_path_parser = __commonJS({
   }
 });
 
-// src/svg-path-to-polygons.ts
+// src/svg-to-polygons.ts
 var import_svg_path_parser = __toESM(require_svg_path_parser(), 1);
 
 // src/cubic.ts
@@ -2166,14 +2166,14 @@ function ellipticArcToCubicBezierCurves(p1, p2, r, xAxisRotation, largeArc, swee
   });
 }
 
-// src/svg-path-to-polygons.ts
-function svgPathToPolygons(svgPathString, opts = {}) {
+// src/path-to-polygons.ts
+function pathToPolygons(commands, opts = {}) {
   if (!opts.tolerance) opts.tolerance = 1;
   const polys = [];
   const tolerance2 = opts.tolerance * opts.tolerance;
   let poly = [];
   let prev;
-  (0, import_svg_path_parser.makeAbsolute)((0, import_svg_path_parser.parseSVG)(svgPathString)).forEach((cmd) => {
+  commands.forEach((cmd) => {
     switch (cmd.code) {
       case "M":
         polys.push(poly = []);
@@ -2291,6 +2291,12 @@ function svgPathToPolygons(svgPathString, opts = {}) {
   }
 }
 
+// src/svg-to-polygons.ts
+function svgPathToPolygons(svgPathString, opts = {}) {
+  const commands = (0, import_svg_path_parser.makeAbsolute)((0, import_svg_path_parser.parseSVG)(svgPathString));
+  return pathToPolygons(commands, opts);
+}
+
 // src/compare.ts
 function compare(pathData, opts = {}, scale = 1) {
   const polys = svgPathToPolygons(pathData, opts);
@@ -2340,6 +2346,7 @@ var index_default = {
 export {
   compare,
   index_default as default,
+  pathToPolygons,
   svgPathToPolygons
 };
 //# sourceMappingURL=index.js.map

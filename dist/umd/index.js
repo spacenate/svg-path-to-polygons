@@ -4,20 +4,22 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./svg-path-to-polygons", "./compare", "./svg-path-to-polygons", "./compare"], factory);
+        define(["require", "exports", "./svg-to-polygons", "./compare", "./path-to-polygons", "./compare", "./svg-to-polygons"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.compare = exports.svgPathToPolygons = void 0;
-    var svg_path_to_polygons_1 = require("./svg-path-to-polygons");
-    Object.defineProperty(exports, "svgPathToPolygons", { enumerable: true, get: function () { return svg_path_to_polygons_1.svgPathToPolygons; } });
+    exports.pathToPolygons = exports.compare = exports.svgPathToPolygons = void 0;
+    var svg_to_polygons_1 = require("./svg-to-polygons");
+    Object.defineProperty(exports, "svgPathToPolygons", { enumerable: true, get: function () { return svg_to_polygons_1.svgPathToPolygons; } });
     var compare_1 = require("./compare");
     Object.defineProperty(exports, "compare", { enumerable: true, get: function () { return compare_1.compare; } });
-    const svg_path_to_polygons_2 = require("./svg-path-to-polygons");
+    var path_to_polygons_1 = require("./path-to-polygons");
+    Object.defineProperty(exports, "pathToPolygons", { enumerable: true, get: function () { return path_to_polygons_1.pathToPolygons; } });
     const compare_2 = require("./compare");
+    const svg_to_polygons_2 = require("./svg-to-polygons");
     exports.default = {
-        pathDataToPolys: svg_path_to_polygons_2.svgPathToPolygons,
+        pathDataToPolys: svg_to_polygons_2.svgPathToPolygons,
         compare: compare_2.compare,
     };
 });

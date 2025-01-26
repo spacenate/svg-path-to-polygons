@@ -4,30 +4,29 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "svg-path-parser", "./cubic", "./quadratic", "./arc"], factory);
+        define(["require", "exports", "./cubic", "./quadratic", "./arc"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.svgPathToPolygons = svgPathToPolygons;
-    const svg_path_parser_1 = require("svg-path-parser");
+    exports.pathToPolygons = pathToPolygons;
     const cubic_1 = require("./cubic");
     const quadratic_1 = require("./quadratic");
     const arc_1 = require("./arc");
     /**
-     * Converts an SVG path string to an array of polygons.
-     * @param svgPathString The SVG path string to convert.
+     * Converts SVG path commands to an array of polygons.
+     * @param commands The SVG path commands to convert.
      * @param opts Optional configuration object.
      * @returns An array of polygons (arrays of points).
      */
-    function svgPathToPolygons(svgPathString, opts = {}) {
+    function pathToPolygons(commands, opts = {}) {
         if (!opts.tolerance)
             opts.tolerance = 1;
         const polys = [];
         const tolerance2 = opts.tolerance * opts.tolerance;
         let poly = [];
         let prev;
-        (0, svg_path_parser_1.makeAbsolute)((0, svg_path_parser_1.parseSVG)(svgPathString)).forEach((cmd) => {
+        commands.forEach((cmd) => {
             switch (cmd.code) {
                 case "M":
                     polys.push((poly = []));

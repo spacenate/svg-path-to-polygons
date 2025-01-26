@@ -1,21 +1,20 @@
-import { parseSVG, makeAbsolute } from "svg-path-parser";
 import { sampleCubicBezier } from "./cubic";
 import { quadraticToCubicBezier } from "./quadratic";
 import { ellipticArcToCubicBezierCurves } from "./arc";
 /**
- * Converts an SVG path string to an array of polygons.
- * @param svgPathString The SVG path string to convert.
+ * Converts SVG path commands to an array of polygons.
+ * @param commands The SVG path commands to convert.
  * @param opts Optional configuration object.
  * @returns An array of polygons (arrays of points).
  */
-export function svgPathToPolygons(svgPathString, opts = {}) {
+export function pathToPolygons(commands, opts = {}) {
     if (!opts.tolerance)
         opts.tolerance = 1;
     const polys = [];
     const tolerance2 = opts.tolerance * opts.tolerance;
     let poly = [];
     let prev;
-    makeAbsolute(parseSVG(svgPathString)).forEach((cmd) => {
+    commands.forEach((cmd) => {
         switch (cmd.code) {
             case "M":
                 polys.push((poly = []));

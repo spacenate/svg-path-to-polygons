@@ -1,4 +1,4 @@
-import { svgPathToPolygons } from "./svg-path-to-polygons";
+import { svgPathToPolygons } from "./svg-to-polygons";
 /**
  * Generates an SVG representation comparing the path and its polygon approximation.
  * Returns the result as an SVG element that can be added to the DOM.

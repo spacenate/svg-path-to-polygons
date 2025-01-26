@@ -4,13 +4,13 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./svg-path-to-polygons"], factory);
+        define(["require", "exports", "./svg-to-polygons"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.compare = compare;
-    const svg_path_to_polygons_1 = require("./svg-path-to-polygons");
+    const svg_to_polygons_1 = require("./svg-to-polygons");
     /**
      * Generates an SVG representation comparing the path and its polygon approximation.
      * Returns the result as an SVG element that can be added to the DOM.
@@ -18,7 +18,7 @@
      * @param opts Optional configuration object for polygon generation.
      */
     function compare(pathData, opts = {}, scale = 1) {
-        const polys = (0, svg_path_to_polygons_1.svgPathToPolygons)(pathData, opts);
+        const polys = (0, svg_to_polygons_1.svgPathToPolygons)(pathData, opts);
         let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
         polys.forEach((poly) => poly.forEach(([x, y]) => {
             if (x < minX)
