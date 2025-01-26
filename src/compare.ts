@@ -1,4 +1,4 @@
-import { svgPathToPolygons } from "./svg-path-to-polygons";
+import { svgPathToPolygons } from "./svg-to-polygons";
 import { SvgPathToPolygonsOptions } from "./types";
 
 /**

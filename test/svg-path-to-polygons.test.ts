@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { svgPathToPolygons } from "../src";
+import { pathDataToPolys } from "../";
 
 const expectations = [
 	{
@@ -121,10 +121,10 @@ function closeTo(
 	);
 }
 
-describe("svgPathToPolygons", () => {
+describe("pathDataToPolys", () => {
 	expectations.forEach((ex) => {
 		it(`${ex.m}: correct polygons and closure`, () => {
-			const result = svgPathToPolygons(ex.d, {
+			const result = pathDataToPolys(ex.d, {
 				tolerance: ex.tolerance,
 				decimals: ex.decimals,
 			});
@@ -140,11 +140,11 @@ describe("svgPathToPolygons", () => {
 	});
 
 	it("throws an error for invalid input", () => {
-		expect(() => svgPathToPolygons("invalid path")).toThrow();
+		expect(() => pathDataToPolys("invalid path")).toThrow();
 	});
 
 	it("handles empty path data gracefully", () => {
-		const result = svgPathToPolygons("");
+		const result = pathDataToPolys("");
 		expect(result).toEqual([]);
 	});
 });

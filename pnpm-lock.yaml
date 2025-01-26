@@ -15,6 +15,9 @@ importers:
         specifier: 1.1.0
         version: 1.1.0
     devDependencies:
+      '@types/opentype.js':
+        specifier: ^1.3.8
+        version: 1.3.8
       '@types/svg-arc-to-cubic-bezier':
         specifier: ^3.2.3
         version: 3.2.3
@@ -289,6 +292,9 @@ packages:
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+
+  '@types/opentype.js@1.3.8':
+    resolution: {integrity: sha512-H6qeTp03jrknklSn4bpT1/9+1xCAEIU2CnjcWPkicJy8A1SKuthanbvoHYMiv79/2W3Xn1XE4gfSJFzt2U3JSw==}
 
   '@types/svg-arc-to-cubic-bezier@3.2.3':
     resolution: {integrity: sha512-UNOnbTtl0nVTm8hwKaz5R5VZRvSulFMGojO5+Q7yucKxBoCaTtS4ibSQVRHo5VW5AaRo145U8p1Vfg5KrYe9Bg==}
@@ -862,6 +868,8 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.6': {}
+
+  '@types/opentype.js@1.3.8': {}
 
   '@types/svg-arc-to-cubic-bezier@3.2.3': {}
 
